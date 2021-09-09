@@ -47,10 +47,6 @@ class ApaleoStream(RESTStream):
         self, response: requests.Response, previous_token: Optional[Any]
     ) -> Optional[Any]:
         """Return a token for identifying next page or None if no more pages."""
-        # TODO: If pagination is required, return a token which can be used to get the
-        #       next page. If this is the final page, return "None" to end the
-        #       pagination loop.
-        self.logger.info("**********************************************")
 
         previous_token = previous_token or 1
         data = response.json()
@@ -66,8 +62,6 @@ class ApaleoStream(RESTStream):
         self, context: Optional[dict], next_page_token: Optional[Any]
     ) -> Dict[str, Any]:
         """Return a dictionary of values to be used in URL parameterization."""
-        self.logger.info("############################ get_url_params() ############################")
-        self.logger.info(next_page_token)
         params: dict = {}
         params["pageSize"] = 1000
         if next_page_token:

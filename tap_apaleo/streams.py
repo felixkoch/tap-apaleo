@@ -23,7 +23,7 @@ from singer_sdk.typing import (
 
 SCHEMAS_DIR = Path(__file__).parent / Path("./schemas")
 
-
+API_DATE_FORMAT = "%Y-%m-%dT%H:%M:%SZ"
 
 class PropertiesStream(ApaleoStream):
     """Define custom stream."""
@@ -83,5 +83,27 @@ class ReservationsStream(ApaleoStream):
     records_jsonpath = "$.reservations[*]"
 
     schema_filepath = SCHEMAS_DIR / "reservations.json"
+
+    def get_url_params(
+        self, context: Optional[dict], next_page_token: Optional[Any]
+    ) -> Dict[str, Any]:
+        """Return a dictionary of values to be used in URL parameterization."""
+        self.logger.info("############################ get_url_params() ############################")
+        starting_timestamp = self.get_starting_timestamp(context)
+        self.logger.info(starting_timestamp)
+
+        self.logger.info(next_page_token)
+        params: dict = {}
+        params["pageSize"] = 1000
+        if next_page_token:
+            params["page"] = next_page_token
+
+        params['expand'] = 'timeSlices'
+        params['dateFilter'] = 'Modification'
+        params['from'] = starting_timestamp.strftime(API_DATE_FORMAT)
+        params["sort"] = 'updated:asc'
+
+        self.logger.info(params)    
+        return params
 
 
