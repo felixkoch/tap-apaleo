@@ -1,0 +1,243 @@
+{
+  "type": [
+    "null",
+    "object"
+  ],
+  "additionalProperties": true,
+  "properties": {
+    "id": {
+      "type": [
+        "null",
+        "string"
+      ]
+    },
+    "bookingId": {
+      "type": [
+        "null",
+        "string"
+      ]
+    },
+    "blockId": {
+      "type": [
+        "null",
+        "string"
+      ]
+    },
+    "groupName": {
+      "type": [
+        "null",
+        "string"
+      ]
+    },
+    "status": {
+      "type": [
+        "null",
+        "string"
+      ]
+    },
+    "checkInTime": {
+      "type": [
+        "null",
+        "string"
+      ],
+      "format": "date-time"
+    },
+    "checkOutTime": {
+      "type": [
+        "null",
+        "string"
+      ],
+      "format": "date-time"
+    },
+    "cancellationTime": {
+      "type": [
+        "null",
+        "string"
+      ],
+      "format": "date-time"
+    },
+    "noShowTime": {
+      "type": [
+        "null",
+        "string"
+      ],
+      "format": "date-time"
+    },
+    "property": {
+      "type": [
+        "null",
+        "object"
+      ],
+      "properties": {
+        "id": {
+          "type": [
+            "null",
+            "string"
+          ]
+        },
+        "code": {
+          "type": [
+            "null",
+            "string"
+          ]
+        },
+        "name": {
+          "type": [
+            "null",
+            "string"
+          ]
+        },
+        "description": {
+          "type": [
+            "null",
+            "string"
+          ]
+        }
+      }
+    },
+    "ratePlan": {
+      "type": [
+        "null",
+        "object"
+      ],
+      "properties": {
+      }
+    },
+    "modified": {
+      "type": [
+        "null",
+        "string"
+      ],
+      "format": "date-time"
+    },
+    "primaryGuest": {
+      "type": [
+        "null",
+        "object"
+      ],
+      "properties": {
+        "title": {
+          "type": [
+            "null",
+            "string"
+          ]
+        },
+        "gender": {
+          "type": [
+            "null",
+            "string"
+          ]
+        },
+        "firstName": {
+          "type": [
+            "null",
+            "string"
+          ]
+        },
+        "middleInitial": {
+          "type": [
+            "null",
+            "string"
+          ]
+        },
+        "lastName": {
+          "type": [
+            "null",
+            "string"
+          ]
+        },
+        "email": {
+          "type": [
+            "null",
+            "string"
+          ]
+        },
+        "phone": {
+          "type": [
+            "null",
+            "string"
+          ]
+        },
+        "address": {
+          "type": [
+            "null",
+            "object"
+          ],
+          "properties": {
+            "addressLine1": {
+              "type": [
+                "null",
+                "string"
+              ]
+            },
+            "addressLine2": {
+              "type": [
+                "null",
+                "string"
+              ]
+            },
+            "postalCode": {
+              "type": [
+                "null",
+                "string"
+              ]
+            },
+            "city": {
+              "type": [
+                "null",
+                "string"
+              ]
+            },
+            "regionCode": {
+              "type": [
+                "null",
+                "string"
+              ]
+            },
+            "countryCode": {
+              "type": [
+                "null",
+                "string"
+              ]
+            }
+          }
+        }
+      }
+    },
+    "timeSlices": {
+      "type": [
+        "null",
+        "array"
+      ],
+      "items": {
+        "type": [
+          "null",
+          "object"
+        ],
+        "properties": {
+          "from": {
+            "type": [
+              "null",
+              "string"
+            ],
+            "format": "date-time"
+          },
+          "to": {
+            "type": [
+              "null",
+              "string"
+            ],
+            "format": "date-time"
+          },
+          "serviceDate": {
+            "type": [
+              "null",
+              "string"
+            ],
+            "format": "date-time"
+          }
+        }
+      }
+    }
+  }
+}
