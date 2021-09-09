@@ -1,8 +1,6 @@
 # tap-apaleo
 
-`tap-apaleo` is a Singer tap for Apaleo.
-
-Built with the [Meltano Tap SDK](https://sdk.meltano.com) for Singer Taps.
+`tap-apaleo` is a Singer tap for apaleo.
 
 ## Note
 This is still work in progress. Do not use in production. Please get in touch.
@@ -83,8 +81,6 @@ tap-apaleo --config CONFIG --discover > ./catalog.json
 
 
 ## Developer Resources
-
-- [ ] `Developer TODO:` As a first step, scan the entire project for the text "`TODO:`" and complete any recommended steps, deleting the "TODO" references once completed.
 
 ### Initialize your Development Environment
 
