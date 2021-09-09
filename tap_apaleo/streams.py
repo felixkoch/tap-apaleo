@@ -19,10 +19,6 @@ from singer_sdk.typing import (
     StringType,
 )
 
-
-
-SCHEMAS_DIR = Path(__file__).parent / Path("./schemas")
-
 API_DATE_FORMAT = "%Y-%m-%dT%H:%M:%SZ"
 
 class PropertiesStream(ApaleoStream):
@@ -32,8 +28,6 @@ class PropertiesStream(ApaleoStream):
     primary_keys = ["id"]
     replication_key = None
     records_jsonpath = "$.properties[*]"
-
-    #schema_filepath = SCHEMAS_DIR / "properties.json"
 
     schema = PropertiesList(
         Property("id", StringType),
@@ -82,8 +76,6 @@ class ReservationsStream(ApaleoStream):
     replication_key = "modified"
     records_jsonpath = "$.reservations[*]"
 
-    schema_filepath = SCHEMAS_DIR / "reservations.json"
-
     def get_url_params(
         self, context: Optional[dict], next_page_token: Optional[Any]
     ) -> Dict[str, Any]:
@@ -106,4 +98,69 @@ class ReservationsStream(ApaleoStream):
         self.logger.info(params)    
         return params
 
+    schema = PropertiesList(
+        Property("id", StringType),
+        Property("bookingId", StringType),
+        Property("blockId", StringType),
+        Property("groupName", StringType),
+        Property("status", StringType),
+        Property("checkInTime", DateTimeType),
+        Property("checkOutTime", DateTimeType),
+        Property("cancellationTime", DateTimeType),
+        Property("noShowTime", DateTimeType),
+        Property("property", ObjectType(
+            Property("id", StringType),
+            Property("code", StringType),
+            Property("code", StringType),
+            Property("description", StringType),
+        )),
+        Property("ratePlan", ObjectType(
+            Property("id", StringType),
+            Property("code", StringType),
+            Property("name", StringType),
+            Property("description", StringType),
+            Property("isSubjectToCityTax", BooleanType),
+        )),
+        Property("unitGroup", ObjectType(
+            Property("id", StringType),
+            Property("code", StringType),
+            Property("name", StringType),
+            Property("description", StringType),
+            Property("type", StringType),
+        )),
+        Property("unit", ObjectType(
+            Property("id", StringType),
+            Property("name", StringType),
+            Property("description", StringType),
+            Property("unitGroupId", StringType),
+        )),
+        Property("totalGrossAmount", ObjectType(
+            Property("amount", NumberType),
+            Property("currency", StringType),
+        )),
+        Property("arrival", DateTimeType),
+        Property("departure", DateTimeType),
+        Property("created", DateTimeType),
+        Property("modified", DateTimeType),
+        Property("adults", IntegerType),
+        
+    ).to_dict()
 
+"""         Property("", StringType),
+        Property("", StringType),
+        Property("", StringType),
+        Property("", StringType),
+        Property("", StringType),
+        Property("", StringType),
+        Property("", StringType),
+        Property("", ObjectType(
+            Property("", StringType),
+            Property("", StringType),
+            Property("", StringType),
+            Property("", StringType),
+            Property("", StringType),
+            Property("", StringType),
+            Property("", StringType),
+            Property("", StringType),
+            Property("", StringType),
+        )), """
