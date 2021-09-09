@@ -4,19 +4,36 @@
 
 Built with the [Meltano Tap SDK](https://sdk.meltano.com) for Singer Taps.
 
-## Installation
+## Note
+This is still work in progress. Do not use in production. Please get in touch.
 
-- [ ] `Developer TODO:` Update the below as needed to correctly describe the install procedure. For instance, if you do not have a PyPi repo, or if you want users to directly install from your git repo, you can modify this step as appropriate.
+## Roadmap
 
-```bash
-pipx install tap-apaleo
-```
+- [ ] Properties
+- [ ] Reservations
+- [ ] UnitGroups
+- [ ] Units
+- [ ] RatePlans
+- [ ] Maintenances
 
 ## Configuration
 
-### Accepted Config Options
+### Using JSON
 
-- [ ] `Developer TODO:` Provide a list of config options accepted by the tap.
+```shell
+tap-apaleo --config config.json
+```
+
+where `config.json` is
+
+```json
+{
+  "start_date" : "2017-01-01T00:00:00Z",
+  "client_id": "<apaleo-client-id>",
+  "client_secret": "<apaleo-client-secret>"
+}
+```
+
 
 A full list of supported settings and capabilities for this
 tap is available by running:
@@ -24,7 +41,6 @@ tap is available by running:
 ```bash
 tap-apaleo --about
 ```
-
 ### Source Authentication and Authorization
 
 - [ ] `Developer TODO:` If your tap requires special access on the source system, or any special authentication requirements, provide those here.
@@ -40,6 +56,23 @@ tap-apaleo --version
 tap-apaleo --help
 tap-apaleo --config CONFIG --discover > ./catalog.json
 ```
+
+## Links
+[apaleo](https://apaleo.com)
+
+## Installation
+
+- [ ] `Developer TODO:` Update the below as needed to correctly describe the install procedure. For instance, if you do not have a PyPi repo, or if you want users to directly install from your git repo, you can modify this step as appropriate.
+
+```bash
+pipx install tap-apaleo
+```
+
+
+
+
+
+
 
 ## Developer Resources
 
