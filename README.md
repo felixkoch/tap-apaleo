@@ -2,6 +2,8 @@
 
 `tap-apaleo` is a Singer tap for apaleo.
 
+The `tap-apaleo` extractor pulls data from the [apaleo API](https://api.apaleo.com/) into [Singer](https://singer.io) based ETL-pipelines, e.g. [Meltano](https://meltano.com). 
+
 ## Note
 This is still work in progress. Do not use in production. Please get in touch.
 
@@ -136,13 +138,6 @@ cd ..
 ./tap-apaleo/.venv/bin/tap-apaleo --config tap-apaleo-conf.json --state state.json | ./target-postgres/.venv/bin/target-postgres --config target-postgres-conf.json >> state.json
 tail -1 state.json > state.json.tmp && mv state.json.tmp state.json
 ```
-
-
-## Links
-[apaleo](https://apaleo.com)
-[Meltano](https://meltano.com/)
-[Singer](https://singer.io/)
-
 
 ## Developer Resources
 
