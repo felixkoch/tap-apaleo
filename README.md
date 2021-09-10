@@ -22,12 +22,12 @@ This is still work in progress. Do not use in production. Please get in touch.
 pipx install git+https://github.com/felixkoch/tap-apaleo.git
 ```
 
-### Using pip
+### Using pip3
 
 ```bash
-python -m venv .venv
+python3 -m venv .venv
 source .venv/bin/activate
-pip install git+https://github.com/felixkoch/tap-apaleo.git
+pip3 install git+https://github.com/felixkoch/tap-apaleo.git
 ```
 
 ## Configuration
@@ -76,8 +76,72 @@ tap-apaleo --help
 tap-apaleo --config CONFIG --discover > ./catalog.json
 ```
 
+### Example: Singer Pipeline with Postgres
+
+`tap-apaleo-conf.json`:
+
+```json
+{
+  "start_date" : "2017-01-01T00:00:00Z",
+  "client_id": "<apaleo-client-id>",
+  "client_secret": "<apaleo-client-secret>"
+}
+```
+
+`target-postgres-conf.json`:
+
+```json
+{
+  "postgres_host": "localhost",
+  "postgres_port": 5432,
+  "postgres_database": "postgres",
+  "postgres_username": "postgres",
+  "postgres_password": "example",
+  "postgres_schema": "public"
+}
+```
+
+`state.json`:
+```json
+{}
+```
+
+#### With pipx
+
+```bash
+pipx install git+https://github.com/felixkoch/tap-apaleo.git
+pipx install singer-target-postgres
+tap-apaleo --config tap-apaleo-conf.json --state state.json | target-postgres --config target-postgres-conf.json >> state.json
+tail -1 state.json > state.json.tmp && mv state.json.tmp state.json
+```
+#### With pip3
+
+Install each Tap and Target in a separate Python virtual environment. This will insure that you won't have conflicting dependencies between any Taps and Targets.
+
+```bash
+mkdir tap-apaleo
+cd tap-apaleo
+python3 -m venv .venv
+source .venv/bin/activate
+pip3 install git+https://github.com/felixkoch/tap-apaleo.git
+deactivate
+cd ..
+mkdir target-postgres
+cd target-postgres
+python3 -m venv .venv
+source .venv/bin/activate
+pip3 install singer-target-postgres
+deactivate
+cd ..
+./tap-apaleo/.venv/bin/tap-apaleo --config tap-apaleo-conf.json --state state.json | ./target-postgres/.venv/bin/target-postgres --config target-postgres-conf.json >> state.json
+tail -1 state.json > state.json.tmp && mv state.json.tmp state.json
+```
+
+
 ## Links
 [apaleo](https://apaleo.com)
+[Meltano](https://meltano.com/)
+[Singer](https://singer.io/)
 
 
 ## Developer Resources
