@@ -8,7 +8,7 @@ This is still work in progress. Do not use in production. Please get in touch.
 ## Roadmap
 
 - [x] Properties
-- [ ] Reservations
+- [x] Reservations
 - [ ] UnitGroups
 - [ ] Units
 - [ ] RatePlans
