@@ -2,10 +2,9 @@
 
 `tap-apaleo` is a Singer tap for apaleo.
 
-The `tap-apaleo` extractor pulls data from the [apaleo API](https://api.apaleo.com/) into [Singer](https://singer.io) based ETL-pipelines, e.g. [Meltano](https://meltano.com). 
+The `tap-apaleo` extractor pulls data from the [apaleo API](https://api.apaleo.com/) into [Singer](https://singer.io) based ETL-pipelines, e.g. [Meltano](https://meltano.com).
 
-## Note
-This is still work in progress. Do not use in production. Please get in touch.
+Synchronise your booking data from apaleo with your data warehouse and build your own revenue KPI and reports in your business intelligence solution.
 
 ## Roadmap
 
@@ -78,6 +77,77 @@ tap-apaleo --help
 tap-apaleo --config CONFIG --discover > ./catalog.json
 ```
 
+
+### Example: Meltano Pipeline with Postgres (recommended)
+
+1. Setup Meltano & initialize Meltano project
+
+```bash
+mkdir meltano-projects
+cd meltano-projects
+python3 -m venv .venv
+source .venv/bin/activate
+pip3 install meltano
+
+meltano init apaleo-pipeline
+cd apaleo-pipeline
+```
+
+2. Edit meltano.yml, add:
+
+```yaml
+plugins:
+  extractors:
+  - name: tap-apaleo
+    namespace: tap_apaleo
+    pip_url: git+https://github.com/felixkoch/tap-apaleo.git
+    executable: tap-apaleo
+    capabilities:
+    - state
+    - catalog
+    - discover
+    config:
+      start_date: '2017-01-01T00:00:00Z'
+    settings:
+    - name: client_id
+    - name: client_secret
+      kind: password
+    - name: start_date
+      value: '2017-01-01T00:00:00Z'
+```
+
+3. Install & configure tap-apaleo
+
+```bash
+meltano install
+meltano config tap-apaleo set client_id <apaleo-client-id>
+meltano config tap-apaleo set client_secret <apaleo-client-secret>
+```
+
+4. Install & configure target-postgres
+
+```bash
+meltano add loader target-postgres
+meltano config target-postgres set postgres_host localhost
+meltano config target-postgres set postgres_port 5432
+meltano config target-postgres set postgres_database postgres
+meltano config target-postgres set postgres_username postgres
+meltano config target-postgres set postgres_password example
+meltano config target-postgres set postgres_schema public
+```
+
+5. Run & schedule ETL pipeline
+
+```bash
+meltano elt tap-apaleo target-postgres --job_id=apaleo-to-postgres
+
+meltano schedule apaleo-to-postgres tap-apaleo target-postgres @hourly
+meltano add orchestrator airflow
+meltano invoke airflow scheduler
+```
+
+6. Read about [Deployment in Production](https://meltano.com/docs/production.html#your-meltano-project).
+
 ### Example: Singer Pipeline with Postgres
 
 `tap-apaleo-conf.json`:
@@ -113,7 +183,9 @@ tap-apaleo --config CONFIG --discover > ./catalog.json
 ```bash
 pipx install git+https://github.com/felixkoch/tap-apaleo.git
 pipx install singer-target-postgres
+
 tap-apaleo --config tap-apaleo-conf.json --state state.json | target-postgres --config target-postgres-conf.json >> state.json
+
 tail -1 state.json > state.json.tmp && mv state.json.tmp state.json
 ```
 #### With pip3
@@ -128,6 +200,7 @@ source .venv/bin/activate
 pip3 install git+https://github.com/felixkoch/tap-apaleo.git
 deactivate
 cd ..
+
 mkdir target-postgres
 cd target-postgres
 python3 -m venv .venv
@@ -135,9 +208,20 @@ source .venv/bin/activate
 pip3 install singer-target-postgres
 deactivate
 cd ..
+
 ./tap-apaleo/.venv/bin/tap-apaleo --config tap-apaleo-conf.json --state state.json | ./target-postgres/.venv/bin/target-postgres --config target-postgres-conf.json >> state.json
 tail -1 state.json > state.json.tmp && mv state.json.tmp state.json
 ```
+
+## Consulting / Open for work
+I can help you setting up the data pipeline and building meaningful reports in Power BI. Please get in touch:
+
+Felix Koch  
+felix@tagungshotels.info  
++49 4266 999 999 9   
+[Make an appointment](https://meetings.hubspot.com/felix137)  
+[Imprint](https://tagungshotels.info/impressum)
+
 
 ## Developer Resources
 
