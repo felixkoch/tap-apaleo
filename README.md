@@ -213,8 +213,8 @@ cd ..
 tail -1 state.json > state.json.tmp && mv state.json.tmp state.json
 ```
 
-## Consulting / Open for work
-I can help you setting up the data pipeline and building meaningful reports in Power BI. Please get in touch:
+## Consulting / Hosting / Open for work
+I'm a freelance Full Stack Developer & Data Analyst from near Hamburg. I can help you with setting up or hosting the data pipeline and creating meaningful reports in Power BI. Please get in touch:
 
 Felix Koch  
 felix@tagungshotels.info  
