@@ -9,14 +9,16 @@ from tap_apaleo.streams import (
     ReservationsStream,
     PropertiesStream,
     UnitGroupsStream,
-    UnitsStream
+    UnitsStream,
+    RatePlansStream
 )
 
 STREAM_TYPES = [
     ReservationsStream,
     PropertiesStream,
     UnitGroupsStream,
-    UnitsStream
+    UnitsStream,
+    RatePlansStream
 ]
 
 

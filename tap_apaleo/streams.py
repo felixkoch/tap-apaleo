@@ -486,6 +486,138 @@ class UnitsStream(ApaleoStream):
     ).to_dict()
 
 
+class RatePlansStream(ApaleoStream):
+    """Define custom stream."""
+    name = "rate-plans"
+    path = "/rateplan/v1/rate-plans"
+    primary_keys = ["id"]
+    replication_key = None
+    records_jsonpath = "$.ratePlans[*]"
+
+    schema = PropertiesList(
+        Property("id", StringType),
+        Property("code", StringType),
+        Property("name", StringType),
+        Property("description", StringType),
+        Property("minGuaranteeType", StringType),
+        Property("priceCalculationMode", StringType),
+        Property("property", ObjectType(
+            Property("id", StringType),
+            Property("code", StringType),
+            Property("name", StringType),
+            Property("description", StringType),
+        )),
+        Property("unitGroup", ObjectType(
+            Property("id", StringType),
+            Property("code", StringType),
+            Property("name", StringType),
+            Property("description", StringType),
+            Property("type", StringType),
+        )),
+        Property("cancellationPolicy", ObjectType(
+            Property("id", StringType),
+            Property("code", StringType),
+            Property("name", StringType),
+            Property("description", StringType),
+            Property("periodPriorToArrival", ObjectType(
+                Property("hours", IntegerType),
+                Property("days", IntegerType),
+                Property("months", IntegerType),
+            )),
+        )),
+        Property("noShowPolicy", ObjectType(
+            Property("id", StringType),
+            Property("code", StringType),
+            Property("name", StringType),
+            Property("description", StringType),
+        )),
+        Property("channelCodes", ArrayType(StringType)),
+        Property("promoCodes", ArrayType(StringType)),
+        Property("timeSliceDefinition", ObjectType(
+            Property("id", StringType),
+            Property("name", StringType),
+            Property("template", StringType),
+            Property("checkInTime", StringType),
+            Property("checkOutTime", StringType),
+        )),
+        Property("restrictions", ObjectType(
+            Property("minAdvance", ObjectType(
+                Property("hours", IntegerType),
+                Property("days", IntegerType),
+                Property("months", IntegerType),
+            )),
+            Property("maxAdvance", ObjectType(
+                Property("hours", IntegerType),
+                Property("days", IntegerType),
+                Property("months", IntegerType),
+            )),
+            Property("lateBookingUntil", StringType),
+        )),
+        Property("bookingPeriods", ArrayType(ObjectType(
+            Property("from", DateTimeType),
+            Property("to", DateTimeType),
+        ))),
+        Property("isBookable", BooleanType),
+        Property("isSubjectToCityTax", BooleanType),
+        Property("pricingRule", ObjectType(
+            Property("baseRatePlan", ObjectType(
+                Property("id", StringType),
+                Property("code", StringType),
+                Property("name", StringType),
+                Property("description", StringType),
+                Property("isSubjectToCityTax", BooleanType),
+            )),
+            Property("type", StringType),
+            Property("value", NumberType),
+        )),
+        Property("isDerived", BooleanType),
+        Property("derivationLevel", IntegerType),
+        Property("surcharges", ArrayType(ObjectType(
+            Property("adults", IntegerType),
+            Property("type", StringType),
+            Property("value", NumberType),
+        ))),
+        Property("ageCategories", ArrayType(ObjectType(
+            Property("id", StringType),
+            Property("surcharges", ArrayType(ObjectType(
+                Property("adults", IntegerType),
+                Property("value", NumberType),
+            ))),
+        ))),
+        Property("includedServices", ArrayType(ObjectType(
+            Property("service", ObjectType(
+                Property("id", StringType),
+                Property("code", StringType),
+                Property("name", StringType),
+                Property("description", StringType),
+            )),
+            Property("grossPrice", ObjectType(
+                Property("amount", NumberType),
+                Property("currency", StringType),
+            )),
+            Property("pricingMode", StringType),
+
+        ))),
+        Property("companies", ArrayType(ObjectType(
+            Property("id", StringType),
+            Property("code", StringType),
+            Property("corporateCode", StringType),
+            Property("name", StringType),
+        ))),
+        Property("ratesRange", ObjectType(
+            Property("from", DateTimeType),
+            Property("to", DateTimeType),
+        )),
+        Property("accountingConfigs", ArrayType(ObjectType(
+            Property("vatType", StringType),
+            Property("serviceType", StringType),
+            Property("subAccountId", StringType),
+            Property("validFrom", DateTimeType),
+        ))),
+
+    ).to_dict()
+
+
 """         Property("", StringType),
         Property("", StringType),
         Property("", StringType),
