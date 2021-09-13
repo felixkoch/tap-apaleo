@@ -618,6 +618,31 @@ class RatePlansStream(ApaleoStream):
     ).to_dict()
 
 
+class MaintenancesStream(ApaleoStream):
+    """Define custom stream."""
+    name = "maintenances"
+    path = "/operations/v1/maintenances"
+    primary_keys = ["id"]
+    replication_key = None
+    records_jsonpath = "$.maintenances[*]"
+
+    schema = PropertiesList(
+        Property("id", StringType),
+        Property("unit", ObjectType(
+            Property("id", StringType),
+            Property("name", StringType),
+            Property("description", StringType),
+            Property("unitGroupId", StringType),
+
+        )),
+        Property("from", DateTimeType),
+        Property("to", DateTimeType),
+        Property("type", StringType),
+        Property("description", StringType),
+
+    ).to_dict()
+
+
 """         Property("", StringType),
         Property("", StringType),
         Property("", StringType),

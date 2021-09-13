@@ -13,7 +13,7 @@ Synchronise your booking data from apaleo with your data warehouse and build you
 - [x] UnitGroups
 - [x] Units
 - [x] RatePlans
-- [ ] Maintenances
+- [x] Maintenances
 
 ## Installation
 

@@ -10,7 +10,8 @@ from tap_apaleo.streams import (
     PropertiesStream,
     UnitGroupsStream,
     UnitsStream,
-    RatePlansStream
+    RatePlansStream,
+    MaintenancesStream
 )
 
 STREAM_TYPES = [
@@ -18,7 +19,8 @@ STREAM_TYPES = [
     PropertiesStream,
     UnitGroupsStream,
     UnitsStream,
-    RatePlansStream
+    RatePlansStream,
+    MaintenancesStream
 ]
 
 
