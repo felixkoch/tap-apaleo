@@ -49,12 +49,16 @@ where `config.json` is
 }
 ```
 
-### Source Authentication and Authorization
+### Authentication and Authorization
 
 Please refert to the apaleo developer documentation on [how to register a OAuth simple client application](https://apaleo.dev/guides/start/oauth-connection/register-app#register-the-oauth-simple-client-application) to get the `client-id` and `client-secret`.
 
 The following scopes must be activated:
 `maintenances.read, rateplans.read-corporate, reservations.read, setup.read`
+
+Alternatively (and if you do not have a developer account) you can use the following link to set up a corresponding client in your account:
+
+https://app.apaleo.com/apps/connected-apps/create?clientCode=TAPAPALEO&clientName=tap-apaleo&secret=tap-apaleo%20is%20a%20Singer%20tap%20for%20apaleo.&clientScopes=%5B%22maintenances.read%22,%22rateplans.read-corporate%22,%22reservations.read%22,%22setup.read%22%5D&piiMode=Retrieve
 
 ### Other
 
