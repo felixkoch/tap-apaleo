@@ -65,7 +65,7 @@ class ApaleoStream(RESTStream):
         params: dict = {}
         params["pageSize"] = 1000
         if next_page_token:
-            params["page"] = next_page_token
+            params["pageNumber"] = next_page_token
         if self.replication_key:
             params["sort"] = "asc"
             params["order_by"] = self.replication_key

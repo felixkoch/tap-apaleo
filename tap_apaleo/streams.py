@@ -79,8 +79,6 @@ class ReservationsStream(ApaleoStream):
         self, context: Optional[dict], next_page_token: Optional[Any]
     ) -> Dict[str, Any]:
         """Return a dictionary of values to be used in URL parameterization."""
-        self.logger.info(
-            "############################ get_url_params() ############################")
         starting_timestamp = self.get_starting_timestamp(context)
         self.logger.info(starting_timestamp)
 
@@ -88,7 +86,7 @@ class ReservationsStream(ApaleoStream):
         params: dict = {}
         params["pageSize"] = 1000
         if next_page_token:
-            params["page"] = next_page_token
+            params["pageNumber"] = next_page_token
 
         params['expand'] = 'timeSlices'
         params['dateFilter'] = 'Modification'
@@ -111,7 +109,7 @@ class ReservationsStream(ApaleoStream):
         Property("property", ObjectType(
             Property("id", StringType),
             Property("code", StringType),
-            Property("code", StringType),
+            Property("name", StringType),
             Property("description", StringType),
         )),
         Property("ratePlan", ObjectType(
@@ -415,6 +413,31 @@ class ReservationsStream(ApaleoStream):
             )),
         )),
         Property("promoCode", StringType),
+    ).to_dict()
+
+class UnitGroupsStream(ApaleoStream):
+    """Define custom stream."""
+    name = "unit-groups"
+    path = "/inventory/v1/unit-groups"
+    primary_keys = ["id"]
+    replication_key = None
+    records_jsonpath = "$.unitGroups[*]"
+
+    schema = PropertiesList(
+        Property("id", StringType),
+        Property("code", StringType),
+        Property("name", StringType),
+        Property("description", StringType),
+        Property("memberCount", IntegerType),
+        Property("maxPersons", IntegerType),
+        Property("rank", IntegerType),
+        Property("type", StringType),
+        Property("property", ObjectType(
+            Property("id", StringType),
+            Property("code", StringType),
+            Property("name", StringType),
+            Property("description", StringType),
+        )),
     ).to_dict()
 
 
