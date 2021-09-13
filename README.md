@@ -11,7 +11,7 @@ Synchronise your booking data from apaleo with your data warehouse and build you
 - [x] Properties
 - [x] Reservations
 - [x] UnitGroups
-- [ ] Units
+- [x] Units
 - [ ] RatePlans
 - [ ] Maintenances
 

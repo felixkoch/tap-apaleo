@@ -8,13 +8,15 @@ from singer_sdk import typing as th  # JSON schema typing helpers
 from tap_apaleo.streams import (
     ReservationsStream,
     PropertiesStream,
-    UnitGroupsStream
+    UnitGroupsStream,
+    UnitsStream
 )
 
 STREAM_TYPES = [
     ReservationsStream,
     PropertiesStream,
-    UnitGroupsStream
+    UnitGroupsStream,
+    UnitsStream
 ]
 
 

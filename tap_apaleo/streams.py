@@ -415,6 +415,7 @@ class ReservationsStream(ApaleoStream):
         Property("promoCode", StringType),
     ).to_dict()
 
+
 class UnitGroupsStream(ApaleoStream):
     """Define custom stream."""
     name = "unit-groups"
@@ -438,6 +439,50 @@ class UnitGroupsStream(ApaleoStream):
             Property("name", StringType),
             Property("description", StringType),
         )),
+    ).to_dict()
+
+
+class UnitsStream(ApaleoStream):
+    """Define custom stream."""
+    name = "units"
+    path = "/inventory/v1/units"
+    primary_keys = ["id"]
+    replication_key = None
+    records_jsonpath = "$.units[*]"
+
+    schema = PropertiesList(
+        Property("id", StringType),
+        Property("name", StringType),
+        Property("description", StringType),
+        Property("property", ObjectType(
+            Property("id", StringType),
+            Property("code", StringType),
+            Property("name", StringType),
+            Property("description", StringType),
+        )),
+        Property("unitGroup", ObjectType(
+            Property("id", StringType),
+            Property("code", StringType),
+            Property("name", StringType),
+            Property("description", StringType),
+            Property("type", StringType),
+        )),
+        Property("status", ObjectType(
+            Property("isOccupied", BooleanType),
+            Property("condition", StringType),
+            Property("maintenance", ObjectType(
+                Property("id", StringType),
+                Property("type", StringType),
+            )),
+        )),
+        Property("maxPersons", IntegerType),
+        Property("created", DateTimeType),
+        Property("attributes", ArrayType(ObjectType(
+            Property("id", StringType),
+            Property("name", StringType),
+            Property("description", StringType),
+        )))
+
     ).to_dict()
 
 
