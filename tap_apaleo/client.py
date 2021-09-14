@@ -48,6 +48,9 @@ class ApaleoStream(RESTStream):
     ) -> Optional[Any]:
         """Return a token for identifying next page or None if no more pages."""
 
+        if(response.status_code == 204):
+            return None
+
         previous_token = previous_token or 1
         data = response.json()
         size = 1000
@@ -85,6 +88,9 @@ class ApaleoStream(RESTStream):
     def parse_response(self, response: requests.Response) -> Iterable[dict]:
         """Parse the response and return an iterator of result rows."""
         # TODO: Parse response body and return a set of records.
+        if(response.status_code == 204):
+            return None
+        
         yield from extract_jsonpath(self.records_jsonpath, input=response.json())
 
     #def post_process(self, row: dict, context: Optional[dict]) -> dict:
