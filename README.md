@@ -222,8 +222,9 @@ I'm a freelance Full Stack Developer & Data Analyst from near Hamburg. I can hel
 
 Felix Koch  
 felix@tagungshotels.info  
-+49 4266 999 999 9   
++49 4266 999 999 9  
 [Make an appointment](https://meetings.hubspot.com/felix137)  
+[https://felixkoch.de](https://felixkoch.de)  
 [Imprint](https://tagungshotels.info/impressum)
 
 
